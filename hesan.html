@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Typoglycemia Generator</title>
+</head>
+<body>
+	<h1>Typoglycemia Generator</h1>
+	<p>Type in a word or sentence below:</p>
+	<input type="text" id="input" oninput="generateTypoglycemia()">
+	<p>Typoglycemia:</p>
+	<p id="output"></p>
+
+	<script type="text/javascript">
+		function generateTypoglycemia() {
+			let input = document.getElementById("input").value;
+			let words = input.split(" ");
+			let output = "";
+			for (let i = 0; i < words.length; i++) {
+				let word = words[i];
+				if (word.length <= 3) {
+					output += word + " ";
+					continue;
+				}
+				let firstLetter = word.charAt(0);
+				let lastLetter = word.charAt(word.length - 1);
+				let middleLetters = word.substring(1, word.length - 1).split("");
+				middleLetters.sort(function() { return 0.5 - Math.random() });
+				let shuffledWord = firstLetter + middleLetters.join("") + lastLetter;
+				output += shuffledWord + " ";
+			}
+			document.getElementById("output").innerHTML = output;
+		}
+	</script>
+</body>
+</html>
